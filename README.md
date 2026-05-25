@@ -1,19 +1,23 @@
-# Antigravity Agent Memory & Compatibility Reference
+# Agent Memory & Compatibility Reference
 
-Welcome to the **Agent Memory** reference repository. This repository serves as a knowledge base and technical documentation for understanding how the Antigravity ecosystem of AI tools (`antigravity` desktop, `antigravity-cli` CLI, and `antigravity-ide` IDE) handles conversation memory, directories, and database state formats.
+Welcome to the **Agent Memory** reference repository. This repository serves as a knowledge base and technical documentation for understanding how various AI assistant tools handle conversation memory, workspace directories, and session databases.
 
 ---
 
 ## 📂 Repository Contents
 
-This repository contains two main reference files:
+This repository contains the following reference files:
 
+### Google Antigravity Ecosystem
 1. **[antygravity.md](./google/antygravity.md)**: Details the internal folder layout, Conversation ID (UUID) matching, and the structure of brain files (artifacts, scratch spaces, and the JSON Lines `transcript.jsonl` chat log).
 2. **[antigravity_compatibility.md](./google/antigravity_compatibility.md)**: Documents database/file formats across different versions (Desktop App vs. CLI vs. IDE Integration) and highlights cross-compatibility.
 
+### Claude Code
+3. **[session_storage.md](./claude/session_storage.md)**: Details project-to-session path encoding, home storage locations, and turn-by-turn chat history (`.jsonl`) files.
+
 ---
 
-## 🧠 Brain Directory Layout
+## 🧠 Antigravity Brain Directory Layout
 
 Every conversation session is assigned a unique **Conversation ID (UUID)** that links the active session to a local brain folder. On Windows, these files reside in:
 
@@ -26,7 +30,7 @@ Inside this folder, you will find:
 
 ---
 
-## 🔄 Compatibility Overview
+## 🔄 Antigravity Compatibility Overview
 
 | Component | `antigravity` (Desktop) | `antigravity-ide` (IDE) | `antigravity-cli` (CLI) | Compatibility |
 | :--- | :--- | :--- | :--- | :--- |
