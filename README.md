@@ -9,7 +9,7 @@ Welcome to the **Agent Memory** reference repository. This repository serves as 
 This repository contains the following reference files:
 
 ### Google Antigravity Ecosystem
-1. **[antygravity.md](./google/antygravity.md)**: Details the internal folder layout, Conversation ID (UUID) matching, and the structure of brain files (artifacts, scratch spaces, and the JSON Lines `transcript.jsonl` chat log).
+1. **[antigravity.md](./google/antigravity.md)**: Details the internal folder layout, Conversation ID (UUID) matching, and the structure of brain files (artifacts, scratch spaces, and the JSON Lines `transcript.jsonl` chat log).
 2. **[antigravity_compatibility.md](./google/antigravity_compatibility.md)**: Documents database/file formats across different versions (Desktop App vs. CLI vs. IDE Integration) and highlights cross-compatibility.
 
 ### Claude Code
