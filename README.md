@@ -40,7 +40,7 @@ Inside this folder, you will find:
 | Component | `antigravity` (Desktop) | `antigravity-ide` (IDE) | `antigravity-cli` (CLI) | Compatibility |
 | :--- | :--- | :--- | :--- | :--- |
 | **Brain Directory (`brain/`)** | Yes | Yes | Yes | **100% Compatible** (identical structure & markdown formats). |
-| **Conversation State (`conversations/`)** | SQLite (`.db`) | SQLite (`.db`) | Protocol Buffers (`.pb`) | **Conditionally Compatible** (Directly compatible between Desktop & IDE; requires export/migrator tools for CLI). |
+| **Conversation State (`conversations/`)** | SQLite (`.db`) | Mixed: Protocol Buffers (`.pb`) for older conversations, SQLite (`.db`) for newer | Protocol Buffers (`.pb`) | **Conditionally Compatible** (Directly compatible between Desktop & IDE; requires export/migrator tools for CLI). |
 
 For more details on migration procedures and compatibility workarounds, see [antigravity_compatibility.md](./google/antigravity_compatibility.md).
 

@@ -185,6 +185,8 @@ On Windows, Chronicle is not currently available according to the docs, but the 
 C:\Users\damador\.codex\memories_extensions\chronicle
 ```
 
+> **Caveat (unverified on Windows):** The `memories_extensions/chronicle` path above is inferred from the macOS layout, not confirmed on this machine. Because Chronicle is macOS-only, no `memories_extensions/` directory exists locally. The Codex extensions that *do* exist on Windows live under `~/.codex/memories/extensions/` (e.g. an `ad_hoc/` folder) — note the different nesting (`memories/extensions/` vs. the documented `memories_extensions/`). Treat this path as a best guess until validated against an actual Chronicle-enabled install.
+
 ## Chronicle Privacy And Security
 
 Chronicle uses screen captures, so it can include sensitive information visible on your screen.
