@@ -10,24 +10,21 @@ C:\Users\damador\Documents\Code\agent-memory
 
 ---
 
-### 2. Storage Location
+### 2. Storage Layout
 
-All project session data lives under the user's home `.claude` directory:
+The user's home `.claude` directory (`C:\Users\<username>\.claude\`) contains several distinct folders managing sessions, settings, and skills:
 
-```
-C:\Users\<username>\.claude\projects\<encoded-project-path>\
-```
-
-Inside that folder:
-* **Session files:** One `.jsonl` file per conversation, named with a UUID:
-  `...\<encoded-path>\<session-uuid>.jsonl`
-* **Memory / artifacts:** Subdirectories the user or agent creates (e.g., `memory\`):
-  `...\<encoded-path>\memory\`
-
-Git worktrees get their own separate entries because they have distinct absolute paths:
-```
-C--Users-damador-Documents-Code-portal--claude-worktrees-agitated-pascal
-```
+* **`projects/`**: The primary workspace-to-session mapping storage:
+  `...\.claude\projects\<encoded-project-path>\`
+  Inside each project directory:
+  * **Session files:** One `.jsonl` file per conversation, named with a UUID: `...\<session-uuid>.jsonl`
+  * **Memory / artifacts:** Subdirectories the user or agent creates (e.g., `memory/` or custom directories).
+  * *Git Worktrees:* Get their own separate entries because they have distinct absolute paths, e.g., `C--Users-damador-Documents-Code-portal--claude-worktrees-agitated-pascal`
+* **`session-env/`**: Stores environment state and temporary variables associated with specific active session UUIDs.
+* **`sessions/`**: Stores process metadata (e.g., `<PID>.json`) tracking active instances of the tool.
+* **`shell-snapshots/`**: Contains shell environment snapshots (e.g. `snapshot-bash-...sh`) used to restore terminal states or command history.
+* **`skills/`**: Stores installed skills, custom tools, and automated agent scripts (e.g. `skill-creator`).
+* **`transcripts/`**: Stores raw session activity logs and index mappings.
 
 ---
 
@@ -46,4 +43,4 @@ C:\Users\<username>\.claude\projects\<encoded-path>\<session-uuid>.jsonl
 
 ### Summary
 
-When Claude Code launches in a directory, it encodes the absolute path, locates the matching folder under `~/.claude/projects/`, and loads the most recent (or selected) `.jsonl` session file to reconstruct conversation history. New turns are appended to that file, and new conversations create a fresh UUID-named file in the same folder.
+When Claude Code launches in a directory, it encodes the absolute path, locates the matching folder under `~/.claude/projects/`, and loads the most recent (or selected) `.jsonl` session file to reconstruct conversation history. New turns are appended to that file, and new conversations create a fresh UUID-named file in the same folder. Additional operational state (like shell history and environment flags) is loaded from companion directories in `~/.claude/`.

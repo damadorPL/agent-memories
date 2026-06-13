@@ -9,16 +9,19 @@ Welcome to the **Agent Memory** reference repository. This repository serves as 
 This repository contains the following reference files:
 
 ### Google Antigravity Ecosystem
-1. **[antigravity.md](./google/antigravity.md)**: Details the internal folder layout, Conversation ID (UUID) matching, and the structure of brain files (artifacts, scratch spaces, and the JSON Lines `transcript.jsonl` chat log).
+1. **[antigravity.md](./google/antigravity.md)**: Details the internal folder layout, Conversation ID (UUID) matching, brain files (artifacts, scratch spaces, and the `transcript.jsonl` log), project configurations, and plugins.
 2. **[antigravity_compatibility.md](./google/antigravity_compatibility.md)**: Documents database/file formats across different versions (Desktop App vs. CLI vs. IDE Integration) and highlights cross-compatibility.
+3. **[ANTIGRAVITY_FEATURES_AND_MEMORY.md](./google/ANTIGRAVITY_FEATURES_AND_MEMORY.md)**: Comprehensive guide on how Google Antigravity uses memory (in-context, workspace knowledge, project config, subagent workspaces) and details all major CLI/IDE features.
 
 ### Claude Code
-3. **[session_storage.md](./claude/session_storage.md)**: Details project-to-session path encoding, home storage locations, and turn-by-turn chat history (`.jsonl`) files.
+4. **[session_storage.md](./claude/session_storage.md)**: Details project-to-session path encoding, home storage locations, and turn-by-turn chat history (`.jsonl`) files.
+5. **[CLAUDE_FEATURES_AND_MEMORY.md](./claude/CLAUDE_FEATURES_AND_MEMORY.md)**: Unified overview of Claude Code's memory (sessions, `CLAUDE.md`, Auto-Memory) and all features (interactive slash commands, session resume/rename/clear flags, compaction).
 
 ### OpenAI Codex
-4. **[CODEX_PROJECT_MEMORY.md](./codex/CODEX_PROJECT_MEMORY.md)**: Explains how Codex handles project-specific conversation memory using repository files (e.g., `CODEX_PROJECT_MEMORY.md`).
-5. **[CODEX_CLI_MEMORY_MODEL.md](./codex/CODEX_CLI_MEMORY_MODEL.md)**: Details Codex's hierarchical instruction model (`AGENTS.md`) and local background-generated Codex Memories/Chronicle screen context.
-6. **[CODEX_MEMORIES_AND_CHRONICLE.md](./codex/CODEX_MEMORIES_AND_CHRONICLE.md)**: Focuses on background-generated Codex Memories configuration, CLI memory limits, and macOS Chronicle screen-capture requirements and security details.
+6. **[CODEX_PROJECT_MEMORY.md](./codex/CODEX_PROJECT_MEMORY.md)**: Explains how Codex handles project-specific conversation memory using repository files (e.g., `CODEX_PROJECT_MEMORY.md`).
+7. **[CODEX_CLI_MEMORY_MODEL.md](./codex/CODEX_CLI_MEMORY_MODEL.md)**: Details Codex's hierarchical instruction model (`AGENTS.md`) and local background-generated Codex Memories/Chronicle screen context.
+8. **[CODEX_MEMORIES_AND_CHRONICLE.md](./codex/CODEX_MEMORIES_AND_CHRONICLE.md)**: Focuses on background-generated Codex Memories configuration, CLI memory limits, and macOS Chronicle screen-capture requirements and security details.
+9. **[CODEX_FEATURES_AND_MEMORY.md](./codex/CODEX_FEATURES_AND_MEMORY.md)**: Detailed mapping of OpenAI Codex CLI features (TUI session commands, CLI state tools) and memory systems (Dynamic Memories, `AGENTS.md` instructions, Chronicle screen capture).
 
 ---
 

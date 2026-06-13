@@ -209,6 +209,25 @@ Chronicle can help Codex infer what you were looking at and what tools or workfl
 - can include sensitive information visible on screen
 - increases prompt-injection risk from malicious screen content
 
+## Global Codex Home Directory Structure
+
+On Windows, global configurations, session histories, memories, and plugins are stored in the Codex home directory:
+```text
+C:\Users\<username>\.codex\
+```
+
+Key subdirectories include:
+* **`memories/`**: Contains generated thread recall files:
+  * `ad_hoc/`: Dynamic, session-specific ad-hoc memories.
+  * `rollout_summaries/`: Markdown summaries of prior completed threads (e.g. `2026-05-22T13-57-59-...md`).
+* **`rules/`**: Global prompt rules, typically stored in `default.rules`.
+* **`sessions/`**: Chronological conversation history logs organized hierarchically by year and month (e.g., `sessions/2026/05/`).
+* **`sqlite/`**: Contains SQLite databases tracking session states (e.g., `codex-dev.db`).
+* **`skills/`**: Bundled and custom capabilities/tools (e.g. `imagegen`, `openai-docs`, `skill-creator`, `skill-installer`).
+* **`plugins/`**: Download caches and staging areas for external plugins.
+* **`vendor_imports/`**: Caches and registry logs for third-party tools.
+* **`tmp/`**: Session argument caches and temporary files.
+
 ## Practical Project Setup
 
 Recommended setup for this machine:
