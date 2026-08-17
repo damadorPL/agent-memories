@@ -56,14 +56,14 @@ If `AGENTS.override.md` exists at a level, it takes precedence over the normal `
 On this Windows machine, the Codex home directory is typically:
 
 ```text
-C:\Users\damador\.codex
+C:\Users\<username>\.codex
 ```
 
 So global guidance can live at:
 
 ```text
-C:\Users\damador\.codex\AGENTS.md
-C:\Users\damador\.codex\AGENTS.override.md
+C:\Users\<username>\.codex\AGENTS.md
+C:\Users\<username>\.codex\AGENTS.override.md
 ```
 
 Project guidance can live in the repository:
@@ -134,7 +134,7 @@ Default path:
 On this Windows machine:
 
 ```text
-C:\Users\damador\.codex\memories
+C:\Users\<username>\.codex\memories
 ```
 
 The docs describe these files as generated state. They may include summaries, durable entries, recent inputs, and supporting evidence from prior threads.
@@ -235,7 +235,7 @@ Recommended setup for this machine:
 1. Put global working preferences in:
 
 ```text
-C:\Users\damador\.codex\AGENTS.md
+C:\Users\<username>\.codex\AGENTS.md
 ```
 
 2. Put project-specific rules in each repository:
@@ -247,7 +247,7 @@ AGENTS.md
 3. Keep generated memories under:
 
 ```text
-C:\Users\damador\.codex\memories
+C:\Users\<username>\.codex\memories
 ```
 
 4. Use project docs for required rules and generated Memories for helpful recall.

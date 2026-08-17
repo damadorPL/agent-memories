@@ -71,7 +71,7 @@ Use environment variables, secret managers, or ignored local files for sensitive
 ## 2026-05-25
 
 - Project goal: experiment with persistent memory for coding agents.
-- Workspace: `C:\Users\damador\Documents\Code\agent-memory`.
+- Workspace: `C:\Users\<username>\Documents\Code\agent-memory`.
 - Preference: keep notes concise and project-specific.
 - Safety: never store credentials in memory files.
 ```

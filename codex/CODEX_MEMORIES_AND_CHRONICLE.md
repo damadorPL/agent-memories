@@ -35,7 +35,7 @@ memories = true
 On Windows, the Codex home directory is typically:
 
 ```text
-C:\Users\damador\.codex
+C:\Users\<username>\.codex
 ```
 
 ## How Memories Work
@@ -62,7 +62,7 @@ Main memory files are stored under:
 On this Windows machine:
 
 ```text
-C:\Users\damador\.codex\memories
+C:\Users\<username>\.codex\memories
 ```
 
 The memory files may include summaries, durable entries, recent inputs, and supporting evidence from prior threads.
@@ -182,7 +182,7 @@ Usually:
 On Windows, Chronicle is not currently available according to the docs, but the equivalent Codex home path would be:
 
 ```text
-C:\Users\damador\.codex\memories_extensions\chronicle
+C:\Users\<username>\.codex\memories_extensions\chronicle
 ```
 
 > **Caveat (unverified on Windows):** The `memories_extensions/chronicle` path above is inferred from the macOS layout, not confirmed on this machine. Because Chronicle is macOS-only, no `memories_extensions/` directory exists locally. The Codex extensions that *do* exist on Windows live under `~/.codex/memories/extensions/` (e.g. an `ad_hoc/` folder) — note the different nesting (`memories/extensions/` vs. the documented `memories_extensions/`). Treat this path as a best guess until validated against an actual Chronicle-enabled install.

@@ -19,14 +19,23 @@ Every session is identified by a unique **Conversation ID (UUID)** (e.g., `df392
      - `implementation_plan.md` & metadata
      - `task.md` & metadata
      - `walkthrough.md` & metadata
-     - `.system_generated/logs/transcript.jsonl` (contains the step-by-step history of planner responses, tool calls, and user messages in JSON Lines format).
+     - `.system_generated/logs/transcript.jsonl` & `transcript_full.jsonl` (step-by-step history of planner responses, tool calls, model thoughts, and user messages in JSON Lines format).
      - `scratch/` (temporary testing scripts).
 
 ---
 
-### 2. Compatibility Between Folders
+### 2. Compatibility Matrix Across Tool Surfaces
 
-* **Brain Directory (`brain/`):** **100% Compatible**. The structure of the `brain/<conversation-id>` directory is completely identical across all three tools (`antigravity`, `antigravity-cli`, and `antigravity-ide`). They all write identical markdown documents and standard JSON Lines transcripts. You can manually copy or link `brain` folders between these tool directories.
-* **Conversation State (`conversations/`):** **Conditionally Compatible**.
-  * **Desktop App & IDE:** Since both `antigravity` and newer `antigravity-ide` store active conversations as SQLite (`.db`) databases, they are compatible. You can copy/move the `<id>.db`, `<id>.db-shm`, and `<id>.db-wal` files along with the matching `brain/<id>` folder between them.
-  * **CLI:** The CLI stores conversation states in `.pb` (Protobuf binary format). To move active conversations from `antigravity-cli` to `antigravity` or `antigravity-ide`, simple copying is not sufficient due to the format mismatch. However, you can use built-in CLI export options to move conversations into the desktop application, or use community migrators (like the *Antigravity IDE Migrator* or *Antigravity Decryptor*) to translate them.
+| Component | `antigravity` (Desktop) | `antigravity-ide` (IDE) | `antigravity-cli` (CLI) | Cross-Tool Compatibility |
+| :--- | :--- | :--- | :--- | :--- |
+| **Brain Directory (`brain/`)** | Yes | Yes | Yes | **100% Compatible**: Identical folder layout, markdown artifacts, and JSON Lines transcripts. |
+| **Conversation State (`conversations/`)** | SQLite (`.db`) | SQLite (`.db`) / Protobuf (`.pb`) | Protobuf (`.pb`) | **Conditionally Compatible**: Desktop and modern IDE can share SQLite files directly; CLI Protobuf states require export/migrator utilities. |
+| **Customizations (`config/` & `.agents/`)** | Yes | Yes | Yes | **100% Compatible**: Shared global (`~/.gemini/config/`) and workspace (`.agents/`) skills, rules, plugins, and MCP configs. |
+| **Knowledge Items (`knowledge/`)** | Yes | Yes | Yes | **100% Compatible**: Localized KI metadata and artifacts are interoperable across all surfaces. |
+
+---
+
+### 3. Migration and Cross-Tool Workflows
+
+* **Desktop App & IDE:** Since both `antigravity` and newer `antigravity-ide` store active conversations as SQLite (`.db`) databases, they are directly compatible. You can copy/move the `<id>.db`, `<id>.db-shm`, and `<id>.db-wal` files along with the matching `brain/<id>` folder between them.
+* **CLI to Desktop/IDE:** The CLI stores conversation states in `.pb` (Protobuf binary format). To move active conversations from `antigravity-cli` to `antigravity` or `antigravity-ide`, use built-in CLI export options (`agy export <id>`) or translation tools to migrate the conversation record into SQLite while linking the shared `brain/<id>` directory.

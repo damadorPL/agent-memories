@@ -1,9 +1,9 @@
 # Antigravity Brain Layout & Configuration Reference
 
-Antigravity maps conversations, brain folders, and chat history using a unique identifier called the **Conversation ID** (a UUID). Here is exactly how it is structured:
+Antigravity maps conversations, brain folders, chat history, and configuration using a structured directory hierarchy. Here is exactly how it is structured:
 
 ### 1. Conversation ID Matching
-Every chat session (including main chats, subagent chats, and past conversations) is assigned a unique UUID, for example: `df39273f-0772-4d21-a454-fd0a08263c7e`. This ID links your active UI window to its underlying local storage.
+Every chat session (including main chats, subagent chats, and past conversations) is assigned a unique **Conversation ID (UUID)**, for example: `df39273f-0772-4d21-a454-fd0a08263c7e`. This ID links your active UI window to its underlying local storage.
 
 ---
 
@@ -20,25 +20,53 @@ Inside this folder, the directory structure is organized as follows:
 * **Scratch Space:** Temporary scripts and code files run during testing or debugging are located in:
   `...\brain\<conversation-id>\scratch\`
 * **System Generated / Logs:** Internal log files and transcript files are located in:
-  `...\brain\<conversation-id>\.system_generated\`
+  `...\brain\<conversation-id>\.system_generated\logs\`
 
 ---
 
-### 3. All Chat History (`transcript.jsonl`)
-The entire step-by-step history of the conversation is stored in a file called **`transcript.jsonl`** located at:
+### 3. Conversation Transcripts (`transcript.jsonl` & `transcript_full.jsonl`)
+The entire step-by-step history of the conversation is stored under:
 ```
-C:\Users\<username>\.gemini\<tool-name>\brain\<conversation-id>\.system_generated\logs\transcript.jsonl
+C:\Users\<username>\.gemini\<tool-name>\brain\<conversation-id>\.system_generated\logs\
 ```
-* **Format:** It is a JSON Lines (JSONL) file, where each line is a self-contained JSON object representing a "step" or action in chronological order.
-* **Content:** It logs the full context of:
-  * User inputs (`USER_INPUT`) and settings changes.
-  * Model thoughts and planning (`PLANNER_RESPONSE`).
-  * Tool calls (such as listing files or running tests) and their outputs.
-  * System prompts (like knowledge artifacts loaded).
+* **`transcript.jsonl`**: Token-efficient version with large tool outputs truncated. Used as the primary fast-scanning log.
+* **`transcript_full.jsonl`**: Complete, untruncated transcript containing full tool payloads and model thoughts.
+* **Format:** JSON Lines (JSONL) format, where each line is a single JSON object representing one step in chronological order.
+* **Step Types:**
+  * `USER_INPUT`: Prompts, file attachments, and settings updates submitted by the user.
+  * `PLANNER_RESPONSE`: Model thoughts, planning text, and tool calls.
+  * `MODEL` / `SYSTEM`: System messages, knowledge items injected, and subagent notifications.
+  * `USER_EXPLICIT`: Explicit actions or confirmations taken by the user.
 
 ---
 
-### 4. Project Configuration (`projects/`)
+### 4. Knowledge Items (KI) Architecture (`knowledge/`)
+Antigravity maintains persistent, repository-specific knowledge items to avoid redundant research:
+```
+C:\Users\<username>\.gemini\<tool-name>\knowledge\
+```
+Inside this directory:
+* **`<ki-id>/metadata.json`**: Summary, creation/update timestamps, and references to original code sources.
+* **`<ki-id>/artifacts/`**: Detailed documentation, architectural notes, and implementation guidelines.
+* **`knowledge.lock`**: Concurrency lock ensuring safe multi-process reads/writes.
+
+---
+
+### 5. Customization Roots & Discovery
+Antigravity automatically discovers and loads customizations from two roots:
+1. **Global Customizations Root:** `C:\Users\<username>\.gemini\config\`
+2. **Workspace Customizations Root:** `<project-root>\.agents\`
+
+Within these roots:
+* **Skills (`skills/<skill_name>/SKILL.md`)**: On-demand workflow guides with YAML frontmatter metadata, helper scripts (`scripts/`), and examples (`examples/`).
+* **Rules (`rules/*.md`, `GEMINI.md`, `AGENTS.md`)**: Style guides, behavioral constraints, and instructions merged hierarchically.
+* **Plugins (`plugins/<plugin_name>/`)**: Namespaced bundles containing `plugin.json`, bundled skills, subagents, and MCP configurations.
+* **Hooks (`hooks.json`)**: Lifecycle event triggers.
+* **MCP Servers (`mcp_config.json` & `<appDataDir>\mcp\<serverName>\`)**: Model Context Protocol tool definitions and best practice guides (`instructions.md`).
+
+---
+
+### 6. Project Configuration (`projects/`)
 Antigravity stores repository-specific configurations and permissions mapping workspaces to specific options under:
 ```
 C:\Users\<username>\.gemini\config\projects\<project-uuid>.json
@@ -56,20 +84,9 @@ C:\Users\<username>\.gemini\config\projects\<project-uuid>.json
 
 ---
 
-### 5. Plugins Directory (`config/plugins/`)
-Ecosystem capabilities can be extended using **Plugins**, which bundle custom skills, configuration, and subagents. They are stored in:
-```
-C:\Users\<username>\.gemini\config\plugins\<plugin-name>\
-```
-* **Key Components:**
-  * `plugin.json` / `gemini-extension.json`: Extension manifest specifying the plugin version, description, and author.
-  * `skills/`: Custom tool and function definitions registered dynamically to extend the agent's toolset.
-  * `agents/`: Custom subagent definitions configured to handle domain-specific workflows.
-
----
-
 ### Summary
 When Antigravity starts or resumes a session:
 1. It reads the local **Project Configuration** and matches the working workspace path.
-2. It loads active **Plugins** from the configuration directories to register helper skills and subagents.
-3. It resolves the **Conversation ID** to load the corresponding **`transcript.jsonl`** file from that ID's brain folder to reconstruct the chat history, and saves any new interactions, plans, or artifacts directly into that folder.
+2. It loads active **Customizations & Plugins** from the global (`~/.gemini/config`) and workspace (`.agents/`) roots.
+3. It loads relevant **Knowledge Items** from `<appDataDir>\knowledge\`.
+4. It resolves the **Conversation ID** to load the corresponding **`transcript.jsonl`** file from that ID's brain folder to reconstruct the chat history, and persists any new interactions, plans, or artifacts directly into that folder.
